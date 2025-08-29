@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
+import { Link } from 'react-router-dom';
 
 function App() {
   const [productos, setProductos] = useState([]);
@@ -56,8 +57,19 @@ function App() {
       <header>
         <img src="/amshop-logo.png" alt="Amshop Camisetas" className="logo" />
         <p>Camisetas oficiales de fútbol</p>
+        <Link to="/admin/login" style={{
+          display: 'inline-block',
+          marginTop: '10px',
+          padding: '8px 16px',
+          backgroundColor: '#0d3b66',
+          color: 'white',
+          textDecoration: 'none',
+          borderRadius: '6px',
+          fontSize: '0.9rem'
+        }}>
+          🔐 Acceder como Admin
+        </Link>
       </header>
-
       <main>
         <h2>🔥 Nuestras Camisetas</h2>
         <div className="grid">

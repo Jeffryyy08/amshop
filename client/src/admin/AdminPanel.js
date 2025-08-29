@@ -7,9 +7,17 @@ import './Admin.css';
 function AdminPanel() {
   const navigate = useNavigate();
 
+  // Verifica si está autenticado
+  const isAuthenticated = localStorage.getItem('adminAuth') === 'true';
+
+  if (!isAuthenticated) {
+    navigate('/admin/login');
+    return null;
+  }
+
   const handleLogout = () => {
     localStorage.removeItem('adminAuth');
-    navigate('/');
+    navigate('/admin/login');
   };
 
   return (

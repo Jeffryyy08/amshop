@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Admin.css';
 
@@ -7,9 +7,16 @@ function Login() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
+  useEffect(() => {
+    // Si ya está autenticado, redirige
+    if (localStorage.getItem('adminAuth') === 'true') {
+      navigate('/admin');
+    }
+  }, [navigate]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (password === 'amshop2025') { // Contraseña segura
+    if (password === 'amshop2025') {
       localStorage.setItem('adminAuth', 'true');
       navigate('/admin');
     } else {
