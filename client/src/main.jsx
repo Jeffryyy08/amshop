@@ -7,7 +7,6 @@ import AdminPanel from './admin/AdminPanel';
 import './admin/Admin.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-
 root.render(
   <BrowserRouter>
     <Routes>

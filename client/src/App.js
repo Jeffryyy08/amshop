@@ -1,27 +1,24 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './App.css';
-import { Link } from 'react-router-dom';
 
 function App() {
   const [productos, setProductos] = useState([]);
-  const [loading, setLoading] = useState(true); // Para mostrar "cargando"
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchProductos = async () => {
       try {
-        // 🔧 Corregido: Eliminé los espacios en la URL
+        // ✅ URL corregida: sin espacios al final
         const res = await axios.get('https://amshop-backend.onrender.com/api/productos');
         setProductos(res.data);
       } catch (error) {
         console.error("Error cargando productos", error);
-        // Puedes mostrar un mensaje al usuario si quieres
       } finally {
-        // 🔚 Siempre se ejecuta, haya error o no
         setLoading(false);
       }
     };
-
     fetchProductos();
   }, []);
 
@@ -31,27 +28,24 @@ function App() {
     window.open(url, '_blank');
   };
 
-  // 🔄 Mientras carga
   if (loading) {
     return (
       <div className="App" style={{ textAlign: 'center', padding: '3rem' }}>
         <h2>🔄 Cargando camisetas...</h2>
-        <p>Un momento, estamos trayendo las mejores camisetas de fútbol</p>
+        <p>Un momento, estamos trayendo las mejores camisetas</p>
       </div>
     );
   }
 
-  // 📦 Si no hay productos
   if (productos.length === 0) {
     return (
       <div className="App" style={{ textAlign: 'center', padding: '3rem' }}>
         <h2>📭 No hay camisetas disponibles</h2>
-        <p>Contacta a tu primo para agregar productos en Supabase.</p>
+        <p>Contacta a tu primo para agregar productos.</p>
       </div>
     );
   }
 
-  // ✅ Si todo está bien: muestra los productos
   return (
     <div className="App">
       <header>
@@ -70,12 +64,12 @@ function App() {
           🔐 Acceder como Admin
         </Link>
       </header>
+
       <main>
         <h2>🔥 Nuestras Camisetas</h2>
         <div className="grid">
-          {productos.map((prod) => (
+          {productos.map(prod => (
             <div key={prod.id} className="producto">
-              {/* ✅ .trim() para eliminar espacios en la URL */}
               <img src={prod.imagen_url?.trim()} alt={prod.nombre} />
               <h3>{prod.nombre}</h3>
               <p className="equipo">{prod.equipo}</p>

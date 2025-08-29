@@ -1,18 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Admin.css';
 
 function Login() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
-
-  useEffect(() => {
-    // Si ya está autenticado, redirige
-    if (localStorage.getItem('adminAuth') === 'true') {
-      navigate('/admin');
-    }
-  }, [navigate]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
