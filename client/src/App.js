@@ -10,7 +10,7 @@ function App() {
   useEffect(() => {
     const fetchProductos = async () => {
       try {
-        // ✅ URL corregida: sin espacios al final
+        // ✅ URL corregida: sin espacios
         const res = await axios.get('https://amshop-backend.onrender.com/api/productos');
         setProductos(res.data);
       } catch (error) {
