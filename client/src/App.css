@@ -1,0 +1,79 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body { font-family: 'Poppins', sans-serif; background: #f8f9fa; }
+
+header {
+  background: #0d3b66;
+  color: white;
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+header .logo {
+  width: 180px;
+  height: auto;
+}
+
+main {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.producto {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  text-align: center;
+  padding: 1rem;
+}
+
+.producto img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+.producto h3 {
+  margin: 1rem 0 0.5rem;
+  font-size: 1.2rem;
+}
+
+.producto .equipo {
+  color: #e53e3e;
+  font-weight: bold;
+}
+
+.producto .precio {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #2d3748;
+}
+
+button {
+  background: #25D366;
+  color: white;
+  border: none;
+  padding: 0.8rem;
+  width: 100%;
+  border-radius: 6px;
+  margin-top: 0.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+footer {
+  text-align: center;
+  padding: 2rem;
+  background: #1a1a1a;
+  color: white;
+  margin-top: 3rem;
+}
