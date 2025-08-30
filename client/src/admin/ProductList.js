@@ -28,7 +28,6 @@ function ProductList() {
       });
 
       if (response.ok || response.status === 204) {
-        // Eliminar del estado local solo si el backend respondió bien
         setProductos(productos.filter(p => p.id !== id));
         alert('✅ Camiseta eliminada correctamente');
       } else {

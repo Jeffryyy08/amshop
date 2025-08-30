@@ -38,6 +38,7 @@ function AddProduct() {
     };
 
     try {
+      // ✅ URL corregida: sin espacios
       const response = await fetch('https://amshop-backend.onrender.com/api/productos', {
         method: 'POST',
         headers: {
