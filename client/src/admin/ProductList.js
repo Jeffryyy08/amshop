@@ -1,88 +1,112 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
-function ProductList() {
-  const [productos, setProductos] = useState([]);
+function AddProduct() {
+  const [nombre, setNombre] = useState('');
+  const [precio, setPrecio] = useState('');
+  const [equipo, setEquipo] = useState('');
+  const [imagen_url, setImagenUrl] = useState('');
+  const [message, setMessage] = useState('');
+  const [errors, setErrors] = useState({});
 
-  useEffect(() => {
-    fetchProductos();
-  }, []);
-
-  const fetchProductos = async () => {
-    try {
-      const res = await fetch('https://amshop-backend.onrender.com/api/productos');
-      const data = await res.json();
-      setProductos(data);
-    } catch (error) {
-      console.error("Error cargando productos", error);
+  const validate = () => {
+    const newErrors = {};
+    if (!nombre.trim()) newErrors.nombre = 'El nombre es obligatorio';
+    if (!precio || precio <= 0) newErrors.precio = 'El precio debe ser mayor a 0';
+    if (!equipo.trim()) newErrors.equipo = 'El equipo es obligatorio';
+    if (!imagen_url.trim()) {
+      newErrors.imagen_url = 'La URL de la imagen es obligatoria';
+    } else if (!imagen_url.trim().match(/\.(jpeg|jpg|png|webp|gif)$/i)) {
+      newErrors.imagen_url = 'Debe ser una URL válida de imagen (.jpg, .png, etc.)';
     }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
-  const handleDelete = async (id) => {
-    if (!window.confirm("¿Eliminar esta camiseta?")) return;
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setMessage('');
+
+    if (!validate()) return;
+
+    const newProduct = {
+      nombre: nombre.trim(),
+      precio: parseInt(precio),
+      equipo: equipo.trim(),
+      imagen_url: imagen_url.trim(),
+      disponible: true,
+    };
 
     try {
-      await fetch(`https://amshop-backend.onrender.com/api/productos?id=eq.${id}`, {
-        method: 'DELETE',
+      const response = await fetch('https://amshop-backend.onrender.com/api/productos', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newProduct),
       });
-      setProductos(productos.filter(p => p.id !== id));
-    } catch (error) {
-      alert("Error al eliminar");
-    }
-  };
 
-  const handleToggleDisponible = async (id, disponible) => {
-    try {
-      await fetch(`https://amshop-backend.onrender.com/api/productos?id=eq.${id}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ disponible: !disponible }),
-      });
-      setProductos(productos.map(p => 
-        p.id === id ? { ...p, disponible: !disponible } : p
-      ));
+      if (response.ok) {
+        setMessage('✅ Camiseta agregada con éxito');
+        setNombre('');
+        setPrecio('');
+        setEquipo('');
+        setImagenUrl('');
+        setErrors({});
+      } else {
+        setMessage('❌ Error al agregar la camiseta');
+      }
     } catch (error) {
-      alert("Error al actualizar disponibilidad");
+      setMessage('❌ Error de conexión con el servidor');
     }
   };
 
   return (
-    <div className="product-list">
-      <h3>📋 Camisetas Existentes</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Equipo</th>
-            <th>Precio</th>
-            <th>Disponible</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {productos.map(prod => (
-            <tr key={prod.id}>
-              <td>{prod.nombre}</td>
-              <td>{prod.equipo}</td>
-              <td>${prod.precio.toLocaleString()}</td>
-              <td>
-                <button
-                  onClick={() => handleToggleDisponible(prod.id, prod.disponible)}
-                  className={prod.disponible ? 'btn-disponible' : 'btn-agotado'}
-                >
-                  {prod.disponible ? 'Sí' : 'No'}
-                </button>
-              </td>
-              <td>
-                <button onClick={() => handleDelete(prod.id)} className="btn-delete">
-                  🗑️
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div className="add-product">
+      <h3>➕ Agregar Nueva Camiseta</h3>
+      {message && <p className={message.includes('Éxito') ? 'success' : 'error'}>{message}</p>}
+
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Nombre de la camiseta"
+          value={nombre}
+          onChange={(e) => setNombre(e.target.value)}
+          className={errors.nombre ? 'error-input' : ''}
+        />
+        {errors.nombre && <p className="error">{errors.nombre}</p>}
+
+        <input
+          type="number"
+          placeholder="Precio (COP)"
+          value={precio}
+          onChange={(e) => setPrecio(e.target.value)}
+          className={errors.precio ? 'error-input' : ''}
+        />
+        {errors.precio && <p className="error">{errors.precio}</p>}
+
+        <input
+          type="text"
+          placeholder="Equipo o selección"
+          value={equipo}
+          onChange={(e) => setEquipo(e.target.value)}
+          className={errors.equipo ? 'error-input' : ''}
+        />
+        {errors.equipo && <p className="error">{errors.equipo}</p>}
+
+        <input
+          type="text"
+          placeholder="URL de la imagen (debe terminar en .jpg, .png, etc.)"
+          value={imagen_url}
+          onChange={(e) => setImagenUrl(e.target.value)}
+          className={errors.imagen_url ? 'error-input' : ''}
+        />
+        {errors.imagen_url && <p className="error">{errors.imagen_url}</p>}
+
+        <button type="submit">Agregar Camiseta</button>
+      </form>
     </div>
   );
 }
 
-export default ProductList;
+export default AddProduct;
