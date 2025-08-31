@@ -6,7 +6,11 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-app.use(cors());
+// ✅ Habilitar CORS para tu dominio de Vercel
+app.use(cors({
+  origin: 'https://amshop-drab.vercel.app'
+}));
+
 app.use(express.json());
 
 const SUPABASE_URL = process.env.SUPABASE_URL;
@@ -28,6 +32,7 @@ app.get('/api/productos', async (req, res) => {
         res.status(500).json({ error: 'Error al cargar productos' });
     }
 });
+
 app.delete('/api/productos', async (req, res) => {
     const { id } = req.query;
 
@@ -53,6 +58,7 @@ app.delete('/api/productos', async (req, res) => {
         res.status(500).json({ error: 'Error al eliminar el producto' });
     }
 });
+
 app.listen(PORT, () => {
     console.log(`✅ Servidor backend en http://localhost:${PORT}`);
 });
