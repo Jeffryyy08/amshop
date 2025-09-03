@@ -1,127 +1,30 @@
-/* Reset y base */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: 'Inter', sans-serif;
-  background: #f8f8f8;
-  color: #000;
-  line-height: 1.6;
-}
-
-/* Header */
-header {
-  background: #e9e9e9;
-  padding: 1rem 0;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  border-bottom: 1px solid #ddd;
-}
-
-.header-container {
-  max-width: 1300px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 1rem;
-}
-
-.logo {
-  width: 100px;
-  height: auto;
-  margin-right: 2rem;
-}
-
-.search-bar {
-  flex: 1;
-  max-width: 400px;
-  margin: 0 2rem;
-}
-
-.search-bar input {
-  width: 100%;
-  padding: 0.8rem;
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  font-size: 1rem;
-  outline: none;
-}
-
-.search-bar input:focus {
-  border-color: #000;
-}
-
-.nav-links {
-  display: flex;
-  gap: 2rem;
-}
-
-.nav-link {
-  text-decoration: none;
-  color: #000;
-  font-size: 0.9rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.3rem;
-  transition: color 0.3s ease;
-}
-
-.nav-link:hover {
-  color: #000;
-}
-
-/* Hero Section - Centrado */
-.hero {
-  text-align: center;
-  padding: 4rem 1rem;
-  max-width: 1300px;
-  margin: 0 auto;
-}
-
-.hero-text h1 {
-  font-size: 2.8rem;
-  font-weight: 700;
-  color: #000;
-  margin-bottom: 1rem;
-  letter-spacing: 0.5px;
-}
-
-.hero-text p {
-  font-size: 1.1rem;
-  color: #555;
-  opacity: 0.8;
-}
-
-/* Animación fade-in */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.hero-text h1,
-.hero-text p {
-  animation: fadeIn 1s ease forwards;
-}
-
-/* Productos - Grid */
-main {
+.catalogo {
   max-width: 1300px;
   margin: 3rem auto;
   padding: 0 1rem;
 }
 
-main h2 {
+.catalogo h1 {
   text-align: center;
-  font-size: 1.8rem;
+  font-size: 2.5rem;
   color: #000;
-  margin-bottom: 2.5rem;
-  font-weight: 500;
+  margin-bottom: 2rem;
+}
+
+.filtros {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.filtros input,
+.filtros select {
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
 }
 
 .grid {
@@ -139,7 +42,7 @@ main h2 {
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   text-align: center;
-  height: 420px; /* Altura fija para todas las tarjetas */
+  height: 420px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -205,18 +108,4 @@ main h2 {
 
 .producto button span {
   vertical-align: middle;
-}
-
-/* Footer */
-footer {
-  text-align: center;
-  padding: 2.5rem;
-  background: #000;
-  color: #fff;
-  margin-top: 4rem;
-  font-size: 0.9rem;
-}
-
-footer p {
-  opacity: 0.8;
 }
