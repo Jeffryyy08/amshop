@@ -8,6 +8,7 @@ import AdminPanel from './admin/AdminPanel';
 import './admin/Admin.css';
 import reportWebVitals from './reportWebVitals';
 
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
@@ -16,6 +17,7 @@ root.render(
         <Route path="/" element={<App />} />
         <Route path="/admin/login" element={<Login />} />
         <Route path="/admin" element={<AdminPanel />} />
+        <Route path="/catalogo" element={<Catalogo />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
