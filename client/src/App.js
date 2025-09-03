@@ -84,9 +84,6 @@ function App() {
 
       {/* Hero Section */}
       <section className="hero">
-        <div className="hero-image">
-          <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.amazon.com%2F-%2Fes%2FCamiseta-Retro-League-Botafogo-1989%2Fdp%2FB07C2QZB2S&psig=AOvVaw2j5jOr__0A0M6hbg2nF5cU&ust=1756945979314000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCOiz9viru48DFQAAAAAdAAAAABAX" alt="Camiseta Botafogo" />
-        </div>
         <div className="hero-text">
           <h1>CAMISETAS AL MEJOR PRECIO</h1>
           <p>AMSHOP, NO NECESITAS BUSCAR MÁS</p>
